@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\V1\Auth\EmailVerificationController;
 use App\Http\Controllers\Api\V1\Auth\LoginController;
 use App\Http\Controllers\Api\V1\TourController;
 use App\Http\Controllers\Api\V1\TravelController;
@@ -26,3 +27,9 @@ Route::prefix('admin')->middleware(['auth:sanctum'])->group(function(){
 });
 
 Route::post('login',LoginController::class);
+
+Route::middleware('auth:sanctum')->group(function(){
+    Route::post('email-verification',[EmailVerificationController::class,'emailverification']);
+    Route::get('email-verification',[EmailVerificationController::class,'sendemailverification']);
+
+});
